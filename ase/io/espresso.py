@@ -1245,10 +1245,10 @@ KEYS = Namelist((
     ('CELL', [
         'cell_dynamics', 'press', 'wmass', 'cell_factor', 'press_conv_thr',
         'cell_dofree']),
-    ('FCP',  [
+    ('FCP', [
         'fcp_mu', 'fcp_dynamics', 'fcp_conv_thr', 'fcp_ndiis', 'fcp_mass',
         'fcp_velocity', 'fcp_temperature', 'fcp_tempw', 'fcp_tolp',
-        'fcp_delta_t', 'fcp_nraise', 'freeze_all_atoms' ])))
+        'fcp_delta_t', 'fcp_nraise', 'freeze_all_atoms'])))
 
 
 # Number of valence electrons in the pseudopotentials recommended by
