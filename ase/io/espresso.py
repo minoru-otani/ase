@@ -1206,7 +1206,7 @@ KEYS = Namelist((
         'prefix', 'lkpoint_dir', 'max_seconds', 'etot_conv_thr',
         'forc_conv_thr', 'disk_io', 'pseudo_dir', 'tefield', 'dipfield',
         'lelfield', 'nberrycyc', 'lorbm', 'lberry', 'gdir', 'nppstr',
-        'lfcpopt', 'monopole']),
+        'lfcp', 'monopole']),
     ('SYSTEM', [
         'ibrav', 'celldm', 'A', 'B', 'C', 'cosAB', 'cosAC', 'cosBC', 'nat',
         'ntyp', 'nbnd', 'tot_charge', 'tot_magnetization',
@@ -1223,7 +1223,8 @@ KEYS = Namelist((
         'emaxpos', 'eopreg', 'eamp', 'angle1', 'angle2',
         'constrained_magnetization', 'fixed_magnetization', 'lambda',
         'report', 'lspinorb', 'assume_isolated', 'esm_bc', 'esm_w',
-        'esm_efield', 'esm_nfit', 'fcp_mu', 'vdw_corr', 'london',
+        'esm_efield', 'esm_nfit', 'lgcscf', 'gcscf_mu', 'gcscf_conv_thr',
+        'gcscf_beta', 'fcp_mu', 'vdw_corr', 'london',
         'london_s6', 'london_c6', 'london_rvdw', 'london_rcut',
         'ts_vdw_econv_thr', 'ts_vdw_isolated', 'xdm', 'xdm_a1', 'xdm_a2',
         'space_group', 'uniqueb', 'origin_choice', 'rhombohedral', 'zmon',
@@ -1243,7 +1244,11 @@ KEYS = Namelist((
         'w_2']),
     ('CELL', [
         'cell_dynamics', 'press', 'wmass', 'cell_factor', 'press_conv_thr',
-        'cell_dofree'])))
+        'cell_dofree']),
+    ('FCP',  [
+        'fcp_mu', 'fcp_dynamics', 'fcp_conv_thr', 'fcp_ndiis', 'fcp_mass',
+        'fcp_velocity', 'fcp_temperature', 'fcp_tempw', 'fcp_tolp',
+        'fcp_delta_t', 'fcp_nraise', 'freeze_all_atoms' ])))
 
 
 # Number of valence electrons in the pseudopotentials recommended by
