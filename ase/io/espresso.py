@@ -1206,7 +1206,7 @@ KEYS = Namelist((
         'prefix', 'lkpoint_dir', 'max_seconds', 'etot_conv_thr',
         'forc_conv_thr', 'disk_io', 'pseudo_dir', 'tefield', 'dipfield',
         'lelfield', 'nberrycyc', 'lorbm', 'lberry', 'gdir', 'nppstr',
-        'lfcp', 'monopole']),
+        'lfcp', 'monopole', 'trism']),
     ('SYSTEM', [
         'ibrav', 'celldm', 'A', 'B', 'C', 'cosAB', 'cosAC', 'cosBC', 'nat',
         'ntyp', 'nbnd', 'tot_charge', 'starting_charge', 'tot_magnetization',
@@ -1248,7 +1248,17 @@ KEYS = Namelist((
     ('FCP', [
         'fcp_mu', 'fcp_dynamics', 'fcp_conv_thr', 'fcp_ndiis', 'fcp_mass',
         'fcp_velocity', 'fcp_temperature', 'fcp_tempw', 'fcp_tolp',
-        'fcp_delta_t', 'fcp_nraise', 'freeze_all_atoms'])))
+        'fcp_delta_t', 'fcp_nraise', 'freeze_all_atoms']),
+    ('RISM', [
+        'nsolv', 'closure', 'tempv', 'solute_lj', 'ecutsolv', 'starting1d',
+        'starting3d', 'smear1d', 'smear3d', 'rism1d_maxstep', 'rism3d_maxstep',
+        'rism1d_conv_thr', 'rism3d_conv_thr', 'mdiis1d_size', 'mdiis3d_size',
+        'mdiis1d_step', 'mdiis3d_step', 'rism1d_bond_width', 'rism1d_nproc',
+        'rism3d_conv_level', 'rism3d_planar_average', 'laue_nfit',
+        'laue_expand_right', 'laue_expand_left', 'laue_starting_right',
+        'laue_starting_left', 'laue_buffer_right', 'laue_buffer_left',
+        'laue_wall', 'laue_wall_z', 'laue_wall_rho', 'laue_wall_epsilon',
+        'laue_wall_sigma', 'laue_wall_lj6'])))
 
 
 # Number of valence electrons in the pseudopotentials recommended by
@@ -1548,7 +1558,8 @@ def kspacing_to_grid(atoms, spacing, calculated_spacing=None):
 
 def write_espresso_in(fd, atoms, input_data=None, pseudopotentials=None,
                       kspacing=None, kpts=None, koffset=(0, 0, 0),
-                      crystal_coordinates=False, **kwargs):
+                      crystal_coordinates=False, solvents_info=None,
+                      **kwargs):
     """
     Create an input file for pw.x.
 
@@ -1745,6 +1756,16 @@ def write_espresso_in(fd, atoms, input_data=None, pseudopotentials=None,
     else:
         # Just use standard cell block
         input_parameters['system']['ibrav'] = 0
+    # Construct solvent information
+    if 'trism' in input_parameters['control']:
+        solvents_str = []
+        for solvent in solvents_info.keys():
+            if solvent != 'density_unit':
+                solvents_str.append(
+                        '{solvent}  {density}  {mol}\n'.format(
+                            solvent=solvent,
+                            density=solvents_info[solvent][0],
+                            mol=solvents_info[solvent][1]))
 
     # Construct input file into this
     pwi = []
