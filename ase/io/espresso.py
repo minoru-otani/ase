@@ -1234,7 +1234,8 @@ KEYS = Namelist((
         'conv_thr_init', 'conv_thr_multi', 'mixing_mode', 'mixing_beta',
         'mixing_ndim', 'mixing_fixed_ns', 'diagonalization', 'ortho_para',
         'diago_thr_init', 'diago_cg_maxiter', 'diago_david_ndim',
-        'diago_full_acc', 'efield', 'efield_cart', 'efield_phase',
+        'diago_full_acc', 'diago_rmm_ndim', 'diago_rmm_conv',
+        'diago_gs_nblock', 'efield', 'efield_cart', 'efield_phase',
         'startingpot', 'startingwfc', 'tqr']),
     ('IONS', [
         'ion_dynamics', 'ion_positions', 'pot_extrapolation',
