@@ -1774,8 +1774,6 @@ def write_espresso_in(fd, atoms, input_data=None, pseudopotentials=None,
     # Assume sections are ordered (taken care of in namelist construction)
     # and that repr converts to a QE readable representation (except bools)
     for section in input_parameters:
-        if len(input_parameters[section]) == 0:
-            continue
         pwi.append('&{0}\n'.format(section.upper()))
         for key, value in input_parameters[section].items():
             if value is True:
