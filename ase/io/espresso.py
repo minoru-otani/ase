@@ -1786,6 +1786,13 @@ def write_espresso_in(fd, atoms, input_data=None, pseudopotentials=None,
         pwi.append('/\n')  # terminate section
     pwi.append('\n')
 
+    # Solvent information
+    if solvents_info is not None:
+        unit_str = solvents_info.get('density_unit')
+        pwi.append('SOLVENTS   {'+unit_str+'}\n')
+        pwi.extend(solvents_str)
+        pwi.append('\n')
+
     # Pseudopotentials
     pwi.append('ATOMIC_SPECIES\n')
     pwi.extend(atomic_species_str)
